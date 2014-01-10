@@ -23,13 +23,8 @@
 
 \specialcomment{notes}{\begingroup\sffamily\color{red}}{\endgroup}
 
-\ifthenelse{\isundefined{\withnotes}}{
-  % exclude the comments
-  \excludecomment{notes}
-}{
-  % include the comments
-  \includecomment{notes}
-}
+\excludecomment{notes}
+
 
 % The fancyvrb package lets us customize the formatting of verbatim
 % environments.  We use a slightly smaller font.
@@ -42,12 +37,12 @@
 \usepackage{outlines}
 
 % see http://tex.stackexchange.com/questions/101717/converting-markdown-to-latex-in-latex
-\newenvironment{markdown}%
-    {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
-    {\end{VerbatimOut}%
-        \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
-        \input{tmp.tex}}
-
+% \newenvironment{markdown}%
+%     {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
+%     {\end{VerbatimOut}%
+%         \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
+%         \input{tmp.tex}}
+% 
 \AtBeginDocument{%
 \fontsize{11}{14}\selectfont
  }%
@@ -55,24 +50,7 @@
 \begin{document}
 \maketitle% this prints the handout title, author, and date
 
-
-\begin{notes}
-These notes will show up because they're outside markdown.
-\end{notes}
-
-\begin{markdown}
-
-# Administrivia
-
-* Volunteer notetaker needed; see me after class.\sidenote{This will require you to visit the DRC (GC 190), copy your notes there at no cost, and leave them there for the student to retrieve. Or, DRC can provide special carbonless (NCR) paper that provides immediate copies of your notes. Thanks for your willingness to help.}
-* The classroom cap for this room is 46 students. This is a limit imposed by the fire code. If you are not planning to stay in this course, please drop soon to make room for others.
-
-\begin{notes}
-These notes will not show up because they're inside the markdown environment.
-\end{notes}
-
-
-\end{markdown}
+$body$
 
 \end{document}
 
