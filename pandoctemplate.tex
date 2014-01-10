@@ -1,0 +1,71 @@
+\documentclass{tufte-handout}[10pt]
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% see http://www.astro.gla.ac.uk/~matthew/blog/?p=376
+
+\usepackage{comment}
+\usepackage{ifthen}
+\usepackage{color}
+
+\specialcomment{notes}{\begingroup\sffamily\color{red}}{\endgroup}
+
+
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+\usepackage{outlines}
+
+% see http://tex.stackexchange.com/questions/101717/converting-markdown-to-latex-in-latex
+% \newenvironment{markdown}%
+%     {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
+%     {\end{VerbatimOut}%
+%         \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
+%         \input{tmp.tex}}
+% 
+\AtBeginDocument{%
+\fontsize{11}{14}\selectfont
+ }%
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+
+$if(notes)$
+\includecomment{notes}
+$else$
+\excludecomment{notes}
+$endif$
+
+\begin{document}
+
+$if(title)$
+\maketitle
+$endif$
+
+$body$
+
+\end{document}
+
+
