@@ -1,0 +1,63 @@
+\documentclass{tufte-handout}[10pt]
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{AMH 2042, Week 1: Reconstruction: a "New South"?}
+\author{Shane Landrum}
+\date{January 9, 2014}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% see http://www.astro.gla.ac.uk/~matthew/blog/?p=376
+
+\usepackage{comment}
+\usepackage{ifthen}
+\usepackage{color}
+
+\specialcomment{notes}{\begingroup\sffamily\color{red}}{\endgroup}
+
+$if(withnotes)$
+  % include the comments
+  \includecomment{notes}
+$else$
+  % exclude the comments
+  \excludecomment{notes}
+$endif$
+
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+\usepackage{outlines}
+
+% see http://tex.stackexchange.com/questions/101717/converting-markdown-to-latex-in-latex
+\newenvironment{markdown}%
+    {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
+    {\end{VerbatimOut}%
+        \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
+        \input{tmp.tex}}
+
+\AtBeginDocument{%
+\fontsize{11}{14}\selectfont
+ }%
+
+\begin{document}
+\maketitle% this prints the handout title, author, and date
+
+$body$
+
+\end{document}
+
+
