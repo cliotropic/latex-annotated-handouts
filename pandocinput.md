@@ -35,7 +35,6 @@ These notes will not show up because they're inside the markdown environment.
 ## If you could find an answer to that question, how do you think your life would change?
 \shortanswer
 
-\pagebreak
 
 # Working in the "New South": from bondage to contract?
 
