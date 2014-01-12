@@ -1,7 +1,6 @@
-\documentclass{tufte-handout}[10pt]
+\documentclass{tufte-handout}[]
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
-
 
 % Set up the images/graphics package
 \usepackage{graphicx}
@@ -11,13 +10,22 @@
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
 
-% see http://www.astro.gla.ac.uk/~matthew/blog/?p=376
+
 
 \usepackage{comment}
-\usepackage{ifthen}
 \usepackage{color}
 
-\specialcomment{notes}{\begingroup\sffamily\color{red}}{\endgroup}
+% framed text for lecturer's notes. 
+\usepackage{mdframed}
+
+\specialcomment{notes}
+	{\definecolor{pale-gray}{gray}{0.95} \begin{mdframed}[backgroundcolor=pale-gray] }
+	{\end{mdframed}}
+
+% vertical spaces for questions in the middle of the notes sheet.
+\newcommand{\shortanswer}{\vspace{24pt} } 
+\newcommand{\medanswer}{\vspace{36pt} } 
+\newcommand{\longanswer}{\vspace{64pt} } 
 
 
 
@@ -31,16 +39,55 @@
 
 \usepackage{outlines}
 
-% see http://tex.stackexchange.com/questions/101717/converting-markdown-to-latex-in-latex
-% \newenvironment{markdown}%
-%     {\VerbatimEnvironment\begin{VerbatimOut}{tmp.markdown}}%
-%     {\end{VerbatimOut}%
-%         \immediate\write18{pandoc tmp.markdown -t latex -o tmp.tex}%
-%         \input{tmp.tex}}
-% 
 \AtBeginDocument{%
-\fontsize{11}{14}\selectfont
+\fontsize{10}{13}\selectfont
  }%
+
+%-------------------------- begin CC-By-NC footer ------------------------------
+\usepackage{lastpage}
+\newcommand{\pageoflastpage}{Page {\thepage} of \pageref*{LastPage}}
+
+% Redefine the empty pagestyle for the title page
+\makeatletter
+\let\oldps@plain\ps@plain
+\renewcommand{\ps@plain}{\oldps@plain%
+\renewcommand{\@evenfoot}{%
+        \makebox[0pt][l]{\parbox{3in}{\scriptsize Copyright \copyright{} 2014
+        by Shane Landrum\\
+        \href
+        {http://creativecommons.org/licenses/by-nc/3.0/us/}
+        %{\tiny CC-BY-NC 3.0 License}}%
+        {\scriptsize Creative Commons Attribution-Noncommercial 3.0 License}}%
+        }%
+        \hfil\ \hfil%
+        \makebox[0pt][r]{\href
+                         {http://creativecommons.org/licenses/by-nc/3.0/us/}
+                         {\includegraphics[clip,width=0.75in]%
+                         {cc-by-nc-thin}}}%
+        }%
+\renewcommand{\@oddfoot}{\@evenfoot}}
+\makeatother
+
+% Use fancy for non-title pages
+\usepackage{fancyhdr,extramarks}
+\fancyhead{}\fancyfoot{}
+%
+
+\lfoot{\makebox[0pt][l]{\parbox{3in}{\scriptsize Copyright \copyright{} 2014
+        by Shane Landrum\\
+        \href
+        {http://creativecommons.org/licenses/by-nc/3.0/us/}
+        %{\tiny CC-BY-NC 3.0 License}}%
+        {\scriptsize Creative Commons Attribution-Noncommercial 3.0
+        License}}}}
+\cfoot{\scriptsize\pageoflastpage}
+\rfoot{\makebox[0pt][r]{\href
+                         {http://creativecommons.org/licenses/by-nc/3.0/us/}
+                         {\includegraphics[clip,width=0.75in]%
+                         {cc-by-nc-thin}}}}
+%
+\pagestyle{fancy}
+%-------------------------- end CC-By-NC footer ------------------------------
 
 $if(title)$
 \title{$title$}
@@ -53,7 +100,7 @@ $if(date)$
 $endif$
 
 $if(notes)$
-\includecomment{notes}
+%\includecomment{notes} % for whatever reason, this needs commenting out to work
 $else$
 \excludecomment{notes}
 $endif$
